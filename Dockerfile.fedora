@@ -2,7 +2,7 @@ FROM fedora:latest
 MAINTAINER Noah Kirschmann <noah.kirschmann@mnd.thm.de>
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN dnf upgrade -q
+RUN dnf upgrade -q -y
 RUN dnf install -y git wget \
     && . /etc/os-release \
     && wget https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$VERSION_ID.noarch.rpm \
