@@ -1,6 +1,6 @@
 FROM fedora:latest
 MAINTAINER Noah Kirschmann <noah.kirschmann@mnd.thm.de>
-ENV DEBIAN_FRONTEND noninteractive
+ENV PATH=$PATH:/root/.local/bin
 
 RUN dnf upgrade -q -y
 RUN dnf install -y git wget \
@@ -9,7 +9,6 @@ RUN dnf install -y git wget \
     && rpm -Uvh rpmfusion-free-release-$VERSION_ID.noarch.rpm
 RUN dnf remove meson ninja \
     && dnf install -y python3 python3-pip opencv-devel clang SDL2-devel ffmpeg-devel gcc-c++ git wget git-lfs \
-    && export PATH=$PATH:/root/.local/bin \
     && python3 -m pip install --user meson ninja
 
 WORKDIR /data
