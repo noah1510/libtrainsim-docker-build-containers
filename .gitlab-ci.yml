@@ -1,12 +1,11 @@
 docker-build:
   # Use the official docker image.
-  image: docker:20.10
+  image: docker:latest
   stage: build
   only:
     - master
   services:
-    - name: docker:20.10-dind
-      alias: docker
+    - docker:dind-rootless
 
   before_script:
     #- echo $K8S_SECRET_DOCKER_ACCESS_TOKEN | docker login -u "noasakurajin" 
