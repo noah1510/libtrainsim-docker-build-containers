@@ -18,7 +18,7 @@ libtrainsim:ubuntu:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:ubuntu" -f Dockerfile.ubuntu .
-    - docker push "$CI_REGISTRY/libtrainsim:ubuntu"
+    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:ubuntu"
 
 libtrainsim:fedora:
   only:
@@ -28,7 +28,7 @@ libtrainsim:fedora:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:fedora" -f Dockerfile.fedora .
-    - docker push "$CI_REGISTRY/libtrainsim:fedora"
+    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:fedora"
 
 libtrainsim:wiki:
   only:
@@ -38,4 +38,4 @@ libtrainsim:wiki:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:wiki" -f Dockerfile.wiki .
-    - docker push "$CI_REGISTRY/libtrainsim:wiki"
+    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:wiki"
