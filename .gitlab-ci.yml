@@ -48,5 +48,5 @@ libtrainsim:pages:
     - priv
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:pages" -f Dockerfile.pages .
+    - docker build --pull -t "$IMAGE_PREFIX:pages" -f Dockerfile.pages .
     - docker push "$IMAGE_PREFIX:pages"
