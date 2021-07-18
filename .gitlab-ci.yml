@@ -7,7 +7,7 @@ docker-build:
   services:
     - docker:dind
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" git.thm.de
 
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:ubuntu" Dockerfile.ubuntu
