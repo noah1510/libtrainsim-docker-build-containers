@@ -1,9 +1,5 @@
 # Use the official docker image.
 image: docker:latest
-only:
-  - master
-tags:
-  - priv
 services:
   - docker:dind-rootless
 
@@ -15,18 +11,30 @@ before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login --pull -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
 
 libtrainsim:ubuntu:
+  only:
+    - master
+  tags:
+    - priv
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:ubuntu" -f Dockerfile.ubuntu .
     - docker push "$CI_REGISTRY/libtrainsim:ubuntu"
 
 libtrainsim:fedora:
+  only:
+    - master
+  tags:
+    - priv
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:fedora" -f Dockerfile.fedora .
     - docker push "$CI_REGISTRY/libtrainsim:fedora"
 
 libtrainsim:wiki:
+  only:
+    - master
+  tags:
+    - priv
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:wiki" -f Dockerfile.wiki .
