@@ -39,3 +39,13 @@ libtrainsim:wiki:
   script:
     - docker build --pull -t "$CI_REGISTRY/libtrainsim:wiki" -f Dockerfile.wiki .
     - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:wiki"
+
+libtrainsim:pages:
+  only:
+    - master
+  tags:
+    - priv
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY/libtrainsim:pages" -f Dockerfile.pages .
+    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:pages"
