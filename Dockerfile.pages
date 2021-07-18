@@ -2,7 +2,8 @@ FROM ubuntu:focal
 MAINTAINER Noah Kirschmann <noah.kirschmann@mnd.thm.de>
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -q && apt-get install -qy doxygen graphviz
+RUN apt-get update -q
+RUN apt-get install -qy doxygen graphviz
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /data
