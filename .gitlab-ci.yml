@@ -6,7 +6,7 @@ services:
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   DOCKER_DRIVER: overlay2
-  IMAGE_PREFIX: $CI_REGISTRY/bahn-simulator/docker-containers/image
+  IMAGE_PREFIX: $CI_REGISTRY/bahn-simulator/libtrainsim/image
 
 before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
@@ -49,4 +49,4 @@ libtrainsim:pages:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:pages" -f Dockerfile.pages .
-    - docker push "$CI_REGISTRY_IMAGE:pages"
+    - docker push "$IMAGE_PREFIX:pages"
