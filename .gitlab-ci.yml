@@ -1,11 +1,11 @@
 docker-build:
   # Use the official docker image.
-  image: docker:latest
+  image: docker:20.10
   stage: build
   only:
     - master
   services:
-    - name: docker:latest-dind
+    - name: docker:20.10-dind
       alias: docker
 
   before_script:
