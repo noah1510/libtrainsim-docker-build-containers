@@ -4,12 +4,14 @@ docker-build:
   stage: build
   only:
     - master
+  tags:
+    - priv
   services:
     - docker:dind-rootless
 
   before_script:
-    #- echo $K8S_SECRET_DOCKER_ACCESS_TOKEN | docker login -u "noasakurajin" 
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    #- echo $K8S_SECRET_DOCKER_ACCESS_TOKEN | docker login -u "noasakurajin" --password-stdin
+    -  -echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
 
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:ubuntu" Dockerfile.ubuntu
