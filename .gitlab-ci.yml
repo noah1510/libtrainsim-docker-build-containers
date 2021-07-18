@@ -14,6 +14,6 @@ docker-build:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
 
   script:
-    - docker build --pull -t "libtrainsim:ubuntu" Dockerfile.ubuntu
+    - docker build --pull -t "libtrainsim:ubuntu" -f Dockerfile.ubuntu .
     - docker push "libtrainsim:ubuntu"
 
