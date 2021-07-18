@@ -3,12 +3,12 @@ MAINTAINER Noah Kirschmann <noah.kirschmann@mnd.thm.de>
 ENV DEBIAN_FRONTEND noninteractive
 ENV PATH=$PATH:/root/.local/bin
 
-RUN apt-get update -q \
-    && apt-get install -qy gcc-10 git curl python3-pip \
-    && python3 -m pip install meson ninja \
-    && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
-    && apt-get install -qy libopencv-dev libsdl2-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libswresample-dev libswscale-dev libpostproc-dev git-lfs \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -q
+RUN apt-get install -qy gcc-10 git curl python3-pip
+RUN python3 -m pip install meson ninja
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install -qy libopencv-dev libsdl2-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavresample-dev libavutil-dev libswresample-dev libswscale-dev libpostproc-dev git-lfs
+RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /data
 VOLUME ["/data"]

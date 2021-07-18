@@ -1,24 +1,33 @@
-docker-build:
-  # Use the official docker image.
-  image: docker:latest
+# Use the official docker image.
+image: docker:latest
+only:
+  - master
+tags:
+  - priv
+services:
+  - docker:dind-rootless
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_DRIVER: overlay2
+
+before_script:
+  - echo "$CI_REGISTRY_PASSWORD" | docker login --pull -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+
+libtrainsim:ubuntu:
   stage: build
-  only:
-    - master
-  tags:
-    - priv
-  services:
-    - docker:dind-rootless
-
-  variables:
-  # The 'docker' hostname is the alias of the service container as described at
-  # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services.
-    DOCKER_TLS_CERTDIR: "/certs"
-
-  before_script:
-    #- echo $K8S_SECRET_DOCKER_ACCESS_TOKEN | docker login -u "noasakurajin" --password-stdin
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-
   script:
-    - docker build -t "libtrainsim:ubuntu" -f Dockerfile.ubuntu .
-    - docker push "libtrainsim:ubuntu"
+    - docker build --pull -t "$CI_REGISTRY/libtrainsim:ubuntu" -f Dockerfile.ubuntu .
+    - docker push "$CI_REGISTRY/libtrainsim:ubuntu"
 
+libtrainsim:fedora:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY/libtrainsim:fedora" -f Dockerfile.fedora .
+    - docker push "$CI_REGISTRY/libtrainsim:fedora"
+
+libtrainsim:wiki:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY/libtrainsim:wiki" -f Dockerfile.wiki .
+    - docker push "$CI_REGISTRY/libtrainsim:wiki"
