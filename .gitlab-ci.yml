@@ -6,6 +6,7 @@ services:
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   DOCKER_DRIVER: overlay2
+  IMAGE_PREFIX: $CI_REGISTRY/bahn-simulator/docker-containers/image
 
 before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
@@ -17,8 +18,8 @@ libtrainsim:ubuntu:
     - priv
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY/libtrainsim:ubuntu" -f Dockerfile.ubuntu .
-    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:ubuntu"
+    - docker build --pull -t "$IMAGE_PREFIX:ubuntu" -f Dockerfile.ubuntu .
+    - docker push "$IMAGE_PREFIX:ubuntu"
 
 libtrainsim:fedora:
   only:
@@ -27,8 +28,8 @@ libtrainsim:fedora:
     - priv
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY/libtrainsim:fedora" -f Dockerfile.fedora .
-    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:fedora"
+    - docker build --pull -t "$IMAGE_PREFIX:fedora" -f Dockerfile.fedora .
+    - docker push "$IMAGE_PREFIX:fedora"
 
 libtrainsim:wiki:
   only:
@@ -37,8 +38,8 @@ libtrainsim:wiki:
     - priv
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY/libtrainsim:wiki" -f Dockerfile.wiki .
-    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:wiki"
+    - docker build --pull -t "$IMAGE_PREFIX:wiki" -f Dockerfile.wiki .
+    - docker push "$IMAGE_PREFIX:wiki"
 
 libtrainsim:pages:
   only:
@@ -47,5 +48,5 @@ libtrainsim:pages:
     - priv
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY/libtrainsim:pages" -f Dockerfile.pages .
-    - docker push "$CI_REGISTRY/bahn-simulator/libtrainsim:pages"
+    - docker build --pull -t "$IMAGE_PREFIX:pages" -f Dockerfile.pages .
+    - docker push "$IMAGE_PREFIX:pages"
