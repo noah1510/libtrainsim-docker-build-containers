@@ -6,7 +6,7 @@ services:
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
   DOCKER_DRIVER: overlay2
-  IMAGE_PREFIX: $CI_REGISTRY/bahn-simulator/libtrainsim/image
+  IMAGE_PREFIX: git-registry.thm.de/bahn-simulator/libtrainsim
 
 before_script:
   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
